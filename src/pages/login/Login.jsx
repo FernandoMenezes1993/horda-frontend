@@ -1,9 +1,11 @@
 import "./LoginStyle.css"
 import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
 
 
 const Login =  () =>{
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -18,9 +20,13 @@ const Login =  () =>{
     }, []);
 
     const handleLoginClick = () => {
-        // Lógica para o que acontece quando o botão Logar é clicado
         console.log('Botão Logar clicado');
     };
+
+    // Navegar para tela de cadastro
+    const Cadastrar = ()=>{
+        navigate("/Cadastro")
+    }
     return(
         <div className="Login">
           <div className="formes">
@@ -34,7 +40,7 @@ const Login =  () =>{
                 <FaLock className="icon" /> {/* Ícone de cadeado */}
             </div>
             <button id="logarButton" onClick={handleLoginClick}>Logar</button>
-            <button>Cadastrar</button>
+            <button onClick={Cadastrar}>Cadastrar</button>
           </div>
         </div>
     )
