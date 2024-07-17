@@ -196,7 +196,10 @@ const Cadastro = () => {
     return (
         <div className={styles.Cadastro}>
             {loading ? (
-                <Loader style={{ color: 'black' }} center size="lg" speed="fast" content="Carregando..." />
+                <div className={styles.Carregamento}>
+                    <Loader style={{ color: 'black' }} center size="lg" speed="fast" content="Carregando..." />
+                </div>
+                
             ) : (
                 <div className={styles.formes}>
                     <h1>A HORDA</h1>
