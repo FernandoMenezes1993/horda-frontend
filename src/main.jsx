@@ -8,6 +8,7 @@ import './index.css'
 
 import Login from "./pages/login/Login.jsx"
 import Cadastro from "./pages/cadastro/Cadastro.jsx"
+import Horda from './pages/horda/Horda.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -15,7 +16,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route element={<App />}>
           <Route path='/' element={<Login />}/>
-          <Route path='/Cadastro' element={<Cadastro />}/>
+          <Route path='/cadastro' element={<Cadastro />}/>
+          <Route path='/horda' element={<Horda />}/>
         </Route>
       </Routes>
     </BrowserRouter>

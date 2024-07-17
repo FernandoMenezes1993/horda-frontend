@@ -41,6 +41,13 @@
     padding: 2%;
     border-radius: 10px;
 }
+.inputContainerError{
+    width: 80%;
+    background-color: white;
+    padding: 2%;
+    border-radius: 10px;
+    border: solid 3px red;
+}
 .inputsLogin{
     width: 85%;
     font-size: 1rem;
@@ -72,3 +79,8 @@
         transform: scale(1.05); 
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.336);
     }
+.Carregamento{
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -16,6 +16,12 @@ const Cadastro = () => {
 
     const [membrosGuilda, setMembrosGuilda] = useState();
     const [tipoSenha, setTipoSenha] = useState("password");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
+    const [cssDivInputsName, setCssDivInputsName] = useState("inputContainer");
+    const [cssDivInputsPassword, setCssDivInputsPassword] = useState("inputContainer");
+    const [cssDivInputsPasswordConfirm, setCssDivInputsPasswordConfirm] = useState("inputContainer");
 
     const toggleTipoSenha = () => {
         setTipoSenha(prevTipo => (prevTipo === 'password' ? 'text' : 'password'));
@@ -43,15 +49,7 @@ const Cadastro = () => {
 
     const Login = () => {
         navigate("/")
-    }
-
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("")
-    const [passwordConfirm, setPasswordConfirm] = useState("")
-
-    const [cssDivInputsName, setCssDivInputsName] = useState("inputContainer");
-    const [cssDivInputsPassword, setCssDivInputsPassword] = useState("inputContainer");
-    const [cssDivInputsPasswordConfirm, setCssDivInputsPasswordConfirm] = useState("inputContainer");
+    }   
 
     const Cadastrar = async() =>{
         if(!name == ""){
