@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaEye, FaEyeSlash } from 'react-icons/fa';
-import styles from "./CadastroStyle.module.css"; // Importação do CSS Module
 
-import { Loader } from 'rsuite';
+import styles from "./CadastroStyle.module.css"; // Importação do CSS Module
+import 'rsuite/dist/rsuite-no-reset.min.css';
+
+import { Loader, Notification, useToaster  } from 'rsuite';
 
 const Cadastro = () => {
     const BackURL = import.meta.env.VITE_URL;
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-
     
+    const [loading, setLoading] = useState(true);
+    const toaster = useToaster();    
 
     const [membrosGuilda, setMembrosGuilda] = useState();
     const [tipoSenha, setTipoSenha] = useState("password");
@@ -51,40 +53,142 @@ const Cadastro = () => {
     const [cssDivInputsPassword, setCssDivInputsPassword] = useState("inputContainer");
     const [cssDivInputsPasswordConfirm, setCssDivInputsPasswordConfirm] = useState("inputContainer");
 
-    const Cadastrar = () =>{
+    const Cadastrar = async() =>{
         if(!name == ""){
             setCssDivInputsName("inputContainer");
             console.log("Nome Digitado");
             
-            // Verificar se o nome digitado esta na guilda
-            console.log(membrosGuilda.length);
-            const quantMember = membrosGuilda.length;
-            let membroEncontrado = false;
+            if(!password == ""){
+                setCssDivInputsPassword("inputContainer");
 
-            for(let i = 0; i < quantMember; i++){
-                if(name == membrosGuilda[i].nome){
-                    console.log("Membro da guilda");
+                if(!passwordConfirm == ""){
+                    setCssDivInputsPasswordConfirm("inputContainer");
 
-                    membroEncontrado = true;
-                    break;
-                }                
+                    if(password == passwordConfirm){
+                        setCssDivInputsPassword("inputContainer");
+                        setCssDivInputsPasswordConfirm("inputContainer");
+
+                        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                        // Verificar se o nome digitado esta na guilda
+                        console.log(membrosGuilda.length);
+                        const quantMember = membrosGuilda.length;
+                        let membroEncontrado = false;
+
+                        for(let i = 0; i < quantMember; i++){
+                            if(name == membrosGuilda[i].nome){
+                                console.log("Membro da guilda");
+
+                                try {
+                                    const checksNameRegistered = await fetch(`${BackURL}/api/checks/name/${name}`);
+                                    if (!checksNameRegistered.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    };
+
+                                    const res = await checksNameRegistered.json();
+
+                                    if(res.User == 404){
+                                        console.log("Podemos cadastrar");
+                                        const newUser ={
+                                            Name: name,
+                                            Senha: password
+                                        };
+                                        try {
+                                            const cadastroNewUser = await fetch(`${BackURL}/api/user/new`,{
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify(newUser)
+                                            });
+                                            if (!cadastroNewUser.ok) {
+                                                throw new Error(`HTTP error! status: ${cadastroNewUser.status}`);
+                                            }
+                                            const result = await cadastroNewUser.json();
+                                            toaster.push(
+                                                <Notification type="success" header="Cadastrado" duration={5000} closable>
+                                                    <p>Cadastro realizado com sucesso!</p>
+                                                </Notification>
+                                            );
+                                            setName("");
+                                            setPassword("");
+                                            setPasswordConfirm("");
+
+                                        } catch (error) {
+                                            console.error(error);
+                                        }
+                                    }
+                                    if(res.User == 502){
+                                        toaster.push(
+                                            <Notification type="warning" header="Aviso" duration={5000} closable>
+                                                <p>Você já está cadastrado!</p>
+                                                <p>Clique <a href="https://www.albionhorda.com.br/">AQUI</a> para logar!</p>
+                                            </Notification>
+                                        );
+                                        setName("");
+                                        setPassword("");
+                                        setPasswordConfirm("");
+                                    }
+                                } catch (error) {
+                                    console.error(error);
+                                }
+
+                                membroEncontrado = true;
+                                break;
+                            }                
+                        }
+
+                        if(!membroEncontrado){
+                            toaster.push(
+                                <Notification type="error" header="Erro" duration={5000} closable>
+                                    <p>Você ainda não faz parte da <strong>HORDA</strong></p>
+                                    <p>Clique <a href="https://discord.gg/JjfWEWNJbc">AQUI</a> para ser recrutado!</p>
+                                </Notification>
+                            );
+
+                            //Encaminhar usuario para tela de convite para guilda
+                                //Criar essa tela!
+
+                            //Apagar os dados digitados
+                            setName("");
+                            setPassword("");
+                            setPasswordConfirm("");
+                        }
+                        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+                    }else{
+                        setCssDivInputsPasswordConfirm("inputContainerError");
+                        setCssDivInputsPassword("inputContainerError");
+                        
+                        toaster.push(
+                            <Notification type="error" header="Erro" duration={5000} closable>
+                                <p>Senha digitada é diferente da confirmação!</p>
+                            </Notification>
+                        );
+                    }
+                }else{
+                    setCssDivInputsPasswordConfirm("inputContainerError");
+                    toaster.push(
+                        <Notification type="error" header="Erro" duration={5000} closable>
+                            <p>Digite a confirmação da senha!</p>
+                        </Notification>
+                    );
+                }
+            }else{
+                setCssDivInputsPassword("inputContainerError");
+                toaster.push(
+                    <Notification type="error" header="Erro" duration={5000} closable>
+                        <p>Você deve digitar uma senha!</p>
+                    </Notification>
+                );
             }
-
-            if(!membroEncontrado){
-                console.log("Membro não é guilda");
-
-                //Encaminhar usuario para tela de convite para guilda
-                    //Criar essa tela!
-
-                //Apagar os dados digitados
-                setName("");
-                setPassword("");
-                setPasswordConfirm("");
-            }
-
         }else{
             setCssDivInputsName("inputContainerError");
-            setName("");
+            setName("");            
+            toaster.push(
+                <Notification type="error" header="Erro" duration={5000} closable>
+                    <p>O nome é obrigatório!</p>
+                </Notification>
+            );
         }
     }
 
@@ -96,7 +200,7 @@ const Cadastro = () => {
             ) : (
                 <div className={styles.formes}>
                     <h1>A HORDA</h1>
-
+                    
                     <div className={styles[cssDivInputsName]}>
                         <input
                             className={styles.inputsLogin}
@@ -107,7 +211,6 @@ const Cadastro = () => {
                         />
                         <FaUser className={styles.icon} />
                     </div>
-
                     <div className={styles[cssDivInputsPassword]}>
 
                         <input className={styles.inputsLogin} type={tipoSenha} placeholder='Digite uma senha...' value={password} onChange={e=> setPassword(e.target.value)}/>
@@ -127,7 +230,7 @@ const Cadastro = () => {
                     <button className={styles.logarButton} onClick={Cadastrar}>Cadastrar</button>
                     <button onClick={Login}>Voltar</button>
                 </div>
-            )}
+            )}            
         </div>
     )
 };
