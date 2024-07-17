@@ -51,6 +51,13 @@
     padding: 2%;
     border-radius: 10px;
 }
+.inputContainerError{
+    width: 80%;
+    background-color: white;
+    padding: 2%;
+    border-radius: 10px;
+    border: solid 3px red;
+}
 .inputsLogin{
     width: 85%;
     font-size: 1rem;
