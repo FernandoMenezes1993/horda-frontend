@@ -57,8 +57,13 @@ const Horda = () => {
         }
     };
     useEffect(() => {
-        verificarToken();
-    }, []);
+        if (token) {
+            verificarToken();
+        } else {
+            console.log("Token não encontrado, redirecionando para login");
+            navigate(`/`);
+        }
+    }, [token]);
 
     const SolicitarRegear = async () => {
         if (linkMorteAlbion.includes("albiononline.com/killboard/kill/")) {
