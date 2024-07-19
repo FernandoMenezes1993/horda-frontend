@@ -39,6 +39,7 @@ const Horda = () => {
     const fecharModal = () => setOpen(false);
 
     const verificarToken = async () => {
+        console.log(token)
         try {
             const res = await fetch(`${BackURL}/api/checks/${token}`);
             if (!res.ok) {
@@ -47,6 +48,7 @@ const Horda = () => {
             const data = await res.json();
             setPlayer(data);
             if (data.res === 502) {
+                console.log(data)
                 navigate(`/`);
             }
         } catch (error) {

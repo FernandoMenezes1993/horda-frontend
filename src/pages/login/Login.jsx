@@ -54,6 +54,7 @@ const Login = () => {
     }, []);
 
     const Logar = async () => {
+        setLoading(true)
         if(!name == ""){
             setCssDivInputsName("inputContainer");
 
@@ -94,7 +95,7 @@ const Login = () => {
                                     }
                                     const res = await checksUser.json()
                                     if(res.res == 200){
-                                        setLoading(true)
+                                        
                                         toaster.push(
                                             <Notification type="success" header="Logando" duration={5000} closable>
                                                 <p>Seja bem vindo!</p>
