@@ -22,7 +22,7 @@ function CustomSidenav ( { Cargo, pg, Nome } ){
                     <div className={styles.navItemContent}>
                         Re-gear
                         {pg === "Horda" && (
-                            <img src="../../public/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
+                            <img src="/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
                         )}                        
                     </div>
                 </Nav.Item>
@@ -31,7 +31,7 @@ function CustomSidenav ( { Cargo, pg, Nome } ){
                     <div className={styles.navItemContent}>
                         Black List
                         {pg === "BlackList" && (
-                            <img src="../../public/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
+                            <img src="/img/HordaIcon.png"  alt="" className={styles.iconHorda}/>
                         )}                        
                     </div>
                 </Nav.Item>
