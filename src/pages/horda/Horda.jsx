@@ -47,8 +47,9 @@ const Horda = () => {
             }
             const data = await res.json();
             setPlayer(data);
+            console.log(data)
             if (data.res === 502) {
-                console.log(data)
+                
                 navigate(`/`);
             }
         } catch (error) {
@@ -140,7 +141,6 @@ const Horda = () => {
             }
             const dataRes = await regears.json();
             setDateRegear(dataRes)
-            console.log(dataRes)
             
         } catch (error) {
             console.log(error)
