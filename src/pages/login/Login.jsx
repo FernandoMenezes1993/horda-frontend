@@ -21,6 +21,7 @@ const Login = () => {
     const [cssDivInputsPassword, setCssDivInputsPassword] = useState("inputContainer");
 
     const getMembrosGuilda = async () => {
+
         try {
             const res = await fetch(`${BackURL}/api/playresGuild`);
             if (!res.ok) {
