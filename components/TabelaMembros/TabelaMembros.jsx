@@ -5,12 +5,12 @@ import TrashIcon from '@rsuite/icons/Trash';
 
 import styles from "./TabelaMembrosStyle.module.css"
 
-function TabelaMembros( { regears }) {
+function TabelaMembros( { regears, token }) {
     const [paginaAtual, setPaginaAtual] = useState(1);
     const [itensPorPagina, setItensPorPagina] = useState(12);
 
     const chamarRegear = (solicitacao) => {
-        const url = `/pedido?q=${token}&id=${solicitacao._id}`;
+        const url = `/pedido?q=${token}&w=${solicitacao._id}`;
         window.open(url, '_blank');
     };
 
@@ -30,11 +30,23 @@ function TabelaMembros( { regears }) {
     }
 
     const VerPedido = (id)=>{
-        alert(`Vamos ver o pedido ${id}`);
+        const url = `/pedido?q=${token}&id=${id}`;
+        window.open(url, '_blank');
+
     }
 
-    return (  
-        <div className={styles.tabelaMembro}>   
+    const pgRegearAlbion =(KillBoard)=>{
+        window.open(KillBoard, '_blank');
+    }
+    return (          
+        <div className={styles.tabelaMembro}>
+            <div className={styles.buttonPaginacao}>
+                {[...Array(totalPaginas).keys()].map(num => (
+                    <button key={num} onClick={() => mudarPagina(num + 1)} className={paginaAtual === num + 1 ? "active" : ""}>
+                        {num + 1}
+                    </button>
+                ))}
+            </div> 
             <table className={styles.tabelaDados}>
                 <thead>
                     <tr>
@@ -56,14 +68,14 @@ function TabelaMembros( { regears }) {
                                 <td className={styles.TabelaTD}>{regear.Name}</td>
                                 <td className={styles.TabelaTD}>{regear.Responsavel}</td>
                                 <td className={styles.TabelaTD}><span className={styles[regear.Status]}>{regear.Status}</span></td>
-                                <td className={styles.TabelaTD}><a href={regear.Link}>Kill Board</a></td>
+                                <td className={styles.TabelaTDKillBoard} onClick={()=> pgRegearAlbion(regear.Link)}>Kill Board</td>
                                 <td className={styles.TabelaTDIcon} onClick={() => VerPedido(regear._id)}><VisibleIcon className={styles.icons}/></td>
                                 <td className={styles.TabelaTDIcon} onClick={() => DeletarPedido(regear._id)}><TrashIcon className={styles.icons}/></td>
                             </tr>
                         ))
                     }
                 </tbody>
-            </table>
+            </table>             
         </div>  
     );
 }

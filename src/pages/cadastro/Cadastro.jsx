@@ -52,6 +52,7 @@ const Cadastro = () => {
     }   
 
     const Cadastrar = async() =>{
+        setLoading(true);
         if(!name == ""){
             setCssDivInputsName("inputContainer");
             console.log("Nome Digitado");
@@ -102,6 +103,7 @@ const Cadastro = () => {
                                                 throw new Error(`HTTP error! status: ${cadastroNewUser.status}`);
                                             }
                                             const result = await cadastroNewUser.json();
+                                            setLoading(false);
                                             toaster.push(
                                                 <Notification type="success" header="Cadastrado" duration={5000} closable>
                                                     <p>Cadastro realizado com sucesso!</p>
@@ -116,6 +118,7 @@ const Cadastro = () => {
                                         }
                                     }
                                     if(res.User == 502){
+                                        setLoading(false);
                                         toaster.push(
                                             <Notification type="warning" header="Aviso" duration={5000} closable>
                                                 <p>Você já está cadastrado!</p>
@@ -129,13 +132,13 @@ const Cadastro = () => {
                                 } catch (error) {
                                     console.error(error);
                                 }
-
                                 membroEncontrado = true;
                                 break;
                             }                
                         }
 
                         if(!membroEncontrado){
+                            setLoading(false);
                             toaster.push(
                                 <Notification type="error" header="Erro" duration={5000} closable>
                                     <p>Você ainda não faz parte da <strong>HORDA</strong></p>
@@ -156,7 +159,7 @@ const Cadastro = () => {
                     }else{
                         setCssDivInputsPasswordConfirm("inputContainerError");
                         setCssDivInputsPassword("inputContainerError");
-                        
+                        setLoading(false);
                         toaster.push(
                             <Notification type="error" header="Erro" duration={5000} closable>
                                 <p>Senha digitada é diferente da confirmação!</p>
@@ -165,6 +168,7 @@ const Cadastro = () => {
                     }
                 }else{
                     setCssDivInputsPasswordConfirm("inputContainerError");
+                    setLoading(false);
                     toaster.push(
                         <Notification type="error" header="Erro" duration={5000} closable>
                             <p>Digite a confirmação da senha!</p>
@@ -173,6 +177,7 @@ const Cadastro = () => {
                 }
             }else{
                 setCssDivInputsPassword("inputContainerError");
+                setLoading(false);
                 toaster.push(
                     <Notification type="error" header="Erro" duration={5000} closable>
                         <p>Você deve digitar uma senha!</p>
@@ -181,7 +186,8 @@ const Cadastro = () => {
             }
         }else{
             setCssDivInputsName("inputContainerError");
-            setName("");            
+            setName("");
+            setLoading(false);
             toaster.push(
                 <Notification type="error" header="Erro" duration={5000} closable>
                     <p>O nome é obrigatório!</p>

@@ -180,11 +180,7 @@ const Horda = () => {
 
                 <div className={styles.TabelaRegear}>
                     {/* Adicione conteúdo da tabela aqui */}
-                    <TabelaMembros regears={dateRegear}/>
-                </div>
-
-                <div className={styles.PaginacaoRegear}>
-                    {/* Adicione conteúdo da paginação aqui */}
+                    <TabelaMembros regears={dateRegear} token={token}/>
                 </div>
             </div>
 

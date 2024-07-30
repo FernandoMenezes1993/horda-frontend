@@ -51,12 +51,6 @@
     background-position: center;
     border-radius: 10px;
 }
-.PaginacaoRegear{
-    width: 90%;
-    height: 4%;
-    background-color: rgb(255, 230, 0);
-    margin-bottom: 1%;
-}
 .abrindoModal{
     position: absolute;
     width: 100%;
