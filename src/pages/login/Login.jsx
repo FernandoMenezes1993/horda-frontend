@@ -62,7 +62,6 @@ const Login = () => {
                 setCssDivInputsPassword("inputContainer");
                 
                 //@@@@@@@@@@@@@@@@@@@@@@@@
-                console.log(membrosGuilda.length);
                 const quantMember = membrosGuilda.length;
                 let membroEncontrado = false;
 
@@ -129,6 +128,7 @@ const Login = () => {
                     }                    
                 }
                 if(!membroEncontrado){
+                    setLoading(false)
                     toaster.push(
                         <Notification type="error" header="Erro" duration={5000} closable>
                             <p>Você não faz parte da <strong>HORDA</strong></p>
