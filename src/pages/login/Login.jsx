@@ -107,6 +107,7 @@ const Login = () => {
                                         }, 3000);
                                     }
                                     if(res.res == 502){
+                                        setLoading(false)
                                         toaster.push(
                                             <Notification type="error" header="Erro" duration={5000} closable>
                                                 <p>Credenciais invalidas!</p>
