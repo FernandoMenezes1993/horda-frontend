@@ -165,6 +165,7 @@ const Horda = () => {
                     Cargo={player.Cargo} 
                     pg={pagina} 
                     Nome={player.User} 
+                    token={token}
                 />
             </div>
             

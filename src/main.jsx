@@ -10,6 +10,7 @@ import Login from "./pages/login/Login.jsx"
 import Cadastro from "./pages/cadastro/Cadastro.jsx"
 import Horda from './pages/horda/Horda.jsx'
 import Pedidos from "./pages/pedidos/Pedidos.jsx"
+import PedidosStaff from "./pages/pedidosStaff/PedidosStaff.jsx"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/cadastro' element={<Cadastro />}/>
           <Route path='/horda' element={<Horda />}/>
           <Route path='/pedido' element={<Pedidos />}/>
+          <Route path='/staff' element={<PedidosStaff />}/>
         </Route>
       </Routes>
     </BrowserRouter>

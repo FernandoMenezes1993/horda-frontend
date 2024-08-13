@@ -1,11 +1,20 @@
 import { Sidenav, Nav } from 'rsuite';
+import { Link, useNavigate } from 'react-router-dom';
+
 import ToolsIcon from '@rsuite/icons/Tools';
 import PageIcon from '@rsuite/icons/Page';
 import AdminIcon from '@rsuite/icons/Admin';
 import styles from "./NavStyle.module.css";
 
-function CustomSidenav ( { Cargo, pg, Nome } ){  
+function CustomSidenav ( { Cargo, pg, Nome, token } ){  
+    const navigate = useNavigate();
 
+    const irPedidosStaff =()=>{
+        navigate(`/staff?q=${token}`);
+    }
+    const irParaRegear= ()=>{
+        navigate(`/horda?q=${token}`);
+    }
     return(
         <div style={{ width: 240 }} className={styles.Navegador}>
             <Sidenav 
@@ -19,7 +28,10 @@ function CustomSidenav ( { Cargo, pg, Nome } ){
                 <Nav activeKey="1">
 
                 <Nav.Item eventKey="1" icon={<ToolsIcon  />}>
-                    <div className={styles.navItemContent}>
+                    <div 
+                    className={styles.navItemContent}
+                    onClick={irParaRegear}
+                    >
                         Re-gear
                         {pg === "Horda" && (
                             <img src="/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
@@ -39,9 +51,12 @@ function CustomSidenav ( { Cargo, pg, Nome } ){
                 {Cargo === "Staff" &&(
                     <Nav.Menu eventKey="3" title="Staff" icon={<AdminIcon />}>
                         <Nav.Item eventKey="3-1">                        
-                            <div className={styles.navItemContent}>
+                            <div 
+                            className={styles.navItemContent}
+                            onClick={irPedidosStaff}
+                            >
                                 Re-gears
-                                {pg === "Re-gears" && (
+                                {pg === "PedidosStaff" && (
                                     <img src="../../public/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
                                 )}                        
                             </div>

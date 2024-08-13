@@ -89,7 +89,7 @@ const Login = () => {
                                 
                                 try {
                                     const checksUser = await fetch(apiCheckPasswod);
-                                    if(!checksUser.ok){
+                                    if(!checksUser.ok){http://localhost:5173/horda?q=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiI2NmI2YzI3YzMzMWRiZmMyNmIzMmFmYjQiLCJVc2VyIjoiU05hZ2luaSIsIkNhcmdvIjoiU3RhZmYiLCJiYWNrZ3JvdW5kSG9yZGEiOiJXbGFjayIsImlhdCI6MTcyMzU1NjgyMiwiZXhwIjoxNzIzNTc0ODIyfQ.-Xu7qd1gakIOrjSPLiONHKNvAI5qfeao8Z0dgjULbs4#
                                         throw new Error(`Erro na busca da API ${apiCheckPasswod}`);
                                     }
                                     const res = await checksUser.json()
@@ -145,6 +145,7 @@ const Login = () => {
                 }
                 //@@@@@@@@@@@@@@@@@@@@@@@@
             }else{
+                setLoading(false)
                 setCssDivInputsPassword("inputContainerError");
                 toaster.push(
                     <Notification type="error" header="Erro" duration={5000} closable>
@@ -154,6 +155,7 @@ const Login = () => {
             }
 
         }else{
+            setLoading(false)
             setCssDivInputsName("inputContainerError");
             toaster.push(
                 <Notification type="error" header="Erro" duration={5000} closable>
