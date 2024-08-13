@@ -57,7 +57,7 @@ function CustomSidenav ( { Cargo, pg, Nome, token } ){
                             >
                                 Re-gears
                                 {pg === "PedidosStaff" && (
-                                    <img src="../../public/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
+                                    <img src="/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
                                 )}                        
                             </div>
                         </Nav.Item>
@@ -65,7 +65,7 @@ function CustomSidenav ( { Cargo, pg, Nome, token } ){
                             <div className={styles.navItemContent}>
                                 Cargos
                                 {pg === "Cargos" && (
-                                    <img src="../../public/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
+                                    <img src="/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
                                 )}                        
                             </div>
                         </Nav.Item>
@@ -74,7 +74,7 @@ function CustomSidenav ( { Cargo, pg, Nome, token } ){
                             <div className={styles.navItemContent}>
                                 Black List
                                 {pg === "BlackListStaff" && (
-                                    <img src="../../public/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
+                                    <img src="/img/HordaIcon.png" alt="" className={styles.iconHorda}/>
                                 )}                        
                             </div>
                         </Nav.Item>
