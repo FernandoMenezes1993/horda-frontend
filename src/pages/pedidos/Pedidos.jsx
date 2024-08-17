@@ -20,7 +20,7 @@ const Pedidos = () => {
     const [detaRegear, setDetaRegear] = useState([]);
     const [dataToken, setDataToken] = useState('');
     const [bauRegear, setBauRegear] = useState('');
-    const [msgParaMembro, setMsgParaMenbro] = useState ('');
+    const [msgParaMembro, setMsgParaMembro] = useState('');
 
     const [imgCabeca, setImgCabeca] = useState("imgCima");
     const ClicoCabeca = ()=>{
@@ -158,13 +158,13 @@ const Pedidos = () => {
 
         const formattedDay = day < 10 ? `0${day}` : `${day}`;
         const formattedMonth = month < 10 ? `0${month}` : `${month}`;
+        console.log(msgParaMembro)
         
-        if(bauRegear){
+        
             const DataFinalizado = `${formattedDay}/${formattedMonth}/${year}`;
             const attRegear ={
                 Status: "Finalizado",
-                DataFinalizado: DataFinalizado, 
-                bauRegear: bauRegear,
+                DataFinalizado: DataFinalizado,
                 MsgStaff: msgParaMembro
             }
             try {
@@ -191,14 +191,6 @@ const Pedidos = () => {
                 setLoading(false);                
                 window.location.reload();
             }, 1000)
-        }else{
-            toaster.push(
-                <Notification type="error" header="Error" duration={5000} closable>
-                    <p>Digite o baú do Re-gear!</p>
-                </Notification>
-            )
-            setLoading(false); 
-        }
     }
     return (
         <div className={styles.pedio}>
@@ -219,7 +211,6 @@ const Pedidos = () => {
                         <p className={styles.DadpsP}><strong>Data solicitada:</strong> {detaRegear.Data}</p>
                         <p><strong>Link da morte:</strong> <a href={`${detaRegear.Link}`} target="_blank">Acessar</a></p>
                         <p><strong>ID do re-gear:</strong> {detaRegear._id}</p>
-                        <p><strong>Baú onde está o Re-gear:</strong> {detaRegear.bauRegear}</p>
                         
                     </div>
                     {dataToken.Cargo === "Membro" &&(
@@ -230,10 +221,6 @@ const Pedidos = () => {
 
                             {detaRegear.DataFinalizado !== "None" &&(
                                 <p className={styles.divStaffAceitoP}><strong>Pedido finalizado em:</strong> {detaRegear.DataFinalizado}</p>
-                            )}
-
-                            {detaRegear.bauRegear !== "0" &&(
-                                <p className={styles.divStaffAceitoP}><strong>Re-ger está no baú:</strong> {detaRegear.bauRegear}</p>
                             )}
 
                             {detaRegear.MsgStaff !== "Null" &&(
@@ -255,10 +242,9 @@ const Pedidos = () => {
                     {dataToken.Cargo === "Staff" && detaRegear.Status === "Aceito"&& (
                         <div className={styles.divStaffAceito}>
                             <p className={styles.divStaffAceitoP}><strong>Data que o pedido foi aceito:</strong> {detaRegear.DataAceito}</p>
-                            <p className={styles.divStaffAceitoP}><strong>Qual baú o re-gear vai ficar:</strong> <input type="text" placeholder='Digite o baú aqui...' value={bauRegear} onChange={e => setBauRegear(e.target.value)}/> Ex: D6</p>
                             <p className={styles.divStaffAceitoP}><strong>Deixe sua mensagem:</strong></p>
                             <div className={styles.divMsgStaff}>
-                                <textarea className={styles.msgStaffParaMembro} rows="4" placeholder='Deixe sua mensagem aqui...' value={msgParaMembro} onChange={e=> setMsgParaMenbro((e.target.value))}/>
+                                <textarea className={styles.msgStaffParaMembro} rows="4" placeholder='Deixe sua mensagem aqui...' value={msgParaMembro} onChange={e => setMsgParaMembro(e.target.value)}/>
                                 <button className={styles.FinalizarRegear} onClick={FinalizarRegear}>Finalizar</button>
                             </div>                          
                         </div>
@@ -266,9 +252,9 @@ const Pedidos = () => {
 
                     {dataToken.Cargo === "Staff" && detaRegear.Status === "Finalizado"&& ( 
                         <div className={styles.divStaffFinalizado}>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido criado em:</strong> {detaRegear.Data}</p>
                             <p className={styles.divStaffAceitoP}><strong>Pedido aceito em:</strong> {detaRegear.DataAceito}</p>
                             <p className={styles.divStaffAceitoP}><strong>Pedido finalizado em:</strong> {detaRegear.DataFinalizado}</p>
-                            <p className={styles.divStaffAceitoP}><strong>Re-ger está no baú:</strong> {detaRegear.bauRegear}</p>
 
                             {detaRegear.MsgStaff !== "Null" &&(
                                 <div>
