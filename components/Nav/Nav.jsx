@@ -5,6 +5,7 @@ import ToolsIcon from '@rsuite/icons/Tools';
 import PageIcon from '@rsuite/icons/Page';
 import AdminIcon from '@rsuite/icons/Admin';
 import styles from "./NavStyle.module.css";
+import SendIcon from '@rsuite/icons/Send';
 
 function CustomSidenav ( { Cargo, pg, Nome, token } ){  
     const navigate = useNavigate();
@@ -14,6 +15,9 @@ function CustomSidenav ( { Cargo, pg, Nome, token } ){
     }
     const irParaRegear= ()=>{
         navigate(`/horda?q=${token}`);
+    }
+    const Sair = ()=>{
+        navigate(`/`);
     }
     return(
         <div style={{ width: 240 }} className={styles.Navegador}>
@@ -80,7 +84,15 @@ function CustomSidenav ( { Cargo, pg, Nome, token } ){
                         </Nav.Item>
                     </Nav.Menu>
                 )}
-                    
+                
+                <Nav.Item eventKey="1" icon={<SendIcon  />}>                    
+                    <div 
+                        className={styles.navItemContent}
+                        onClick={Sair}
+                    >
+                        Logout                                                
+                    </div>
+                </Nav.Item>
                 
                 </Nav>
                 

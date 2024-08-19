@@ -1,5 +1,5 @@
 import CustomSidenav from "../../../components/Nav/Nav.jsx";
-import TabelaMembros from "../../../components/TabelaMembros/TabelaMembros.jsx";
+import TabelaMembros from "../../../components/TabelaStaff/TabelaStaff.jsx";
 
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';

@@ -114,10 +114,23 @@ const Horda = () => {
                     setTimeout(()=>{                        
                         window.location.reload();
                     }, 2000)
-                } else {
+                } else if(result === 400){
+                    console.log(result)
+                    setOpen(false)
                     toaster.push(
                         <Notification type="error" header="Error" duration={5000} closable>
-                            <p>Erro na solciitação!</p>
+                            <p>Você não foi a vitima nesse evento!</p>
+                            <p>Verifique o link da sua morte e solicite novamente!</p>
+                        </Notification>
+                    );
+                    setLinkMorteAlbion("");
+
+                } else if(result === 404){
+                    setOpen(false)
+                    toaster.push(
+                        <Notification type="error" header="Error" duration={5000} closable>
+                            <p>Esse Re-gear ja foi solicitado anteriormente</p>
+                            <p>Verifique o link da sua morte e solicite novamente!</p>
                         </Notification>
                     );
                     setLinkMorteAlbion("");
@@ -126,6 +139,8 @@ const Horda = () => {
                 console.error(error);
                 setLinkMorteAlbion("");
             }
+
+            
         } else {
             setLinkMorteAlbion("");
             toaster.push(

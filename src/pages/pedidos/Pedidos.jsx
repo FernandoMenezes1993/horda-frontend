@@ -2,6 +2,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { useState, useEffect  } from 'react';
 
 import { Loader, Notification, useToaster } from 'rsuite';
+import { Modal, Button, ButtonToolbar, Placeholder } from 'rsuite';
 import LaMuerte  from "../../../public/img/icon/LaMuerte.png"
 import CertoVerde from "../../../public/img/icon/PedidoCerto.png"
 
@@ -19,8 +20,12 @@ const Pedidos = () => {
     const idRegear = searchParams.get("id");
     const [detaRegear, setDetaRegear] = useState([]);
     const [dataToken, setDataToken] = useState('');
-    const [bauRegear, setBauRegear] = useState('');
     const [msgParaMembro, setMsgParaMembro] = useState('');
+    const [msgRecusado, setMsgRecusado] = useState('');
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const [imgCabeca, setImgCabeca] = useState("imgCima");
     const ClicoCabeca = ()=>{
@@ -192,6 +197,32 @@ const Pedidos = () => {
                 window.location.reload();
             }, 1000)
     }
+
+    const recusarRegear = async()=>{
+        const attRegear ={
+            MsgStaff: msgRecusado,
+            Status: "Negado"
+        }
+        try {
+            const response = await fetch(`${BackURL}/api/regear/negado/${detaRegear._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    body: JSON.stringify(attRegear)
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                atualizarPagina();
+        } catch (error) {
+            
+        }
+        setTimeout(()=>{
+            setLoading(false);                
+            window.location.reload();
+        }, 1000)
+    }
     return (
         <div className={styles.pedio}>
             {loading ? (
@@ -235,7 +266,7 @@ const Pedidos = () => {
                     {dataToken.Cargo === "Staff" && detaRegear.Status === "Pendente"&& (
                         <div className={styles.divStaff}> 
                             <button className={styles.BtnAceitar} onClick={aceitarRegear}>Aceitar</button>
-                            <button className={styles.BtnRecusar}>Recusar</button>
+                            <button className={styles.BtnRecusar} onClick={handleOpen}>Recusar</button>
                         </div>
                     )}
 
@@ -264,6 +295,37 @@ const Pedidos = () => {
                             )}  
                         </div>
                     )}
+
+                    {dataToken.Cargo === "Staff" && detaRegear.Status === "Resgatado"&& ( 
+                        <div className={styles.divStaffFinalizado}>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido criado em:</strong> {detaRegear.Data}</p>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido aceito em:</strong> {detaRegear.DataAceito}</p>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido finalizado em:</strong> {detaRegear.DataFinalizado}</p>
+
+                            {detaRegear.MsgStaff !== "Null" &&(
+                                <div>
+                                    <p className={styles.Msg}><strong>Mensagem da Staff:</strong></p>
+                                    <p className={styles.Msg}>{detaRegear.MsgStaff}</p>
+                                </div>
+                            )}  
+                        </div>
+                    )}
+
+                    {dataToken.Cargo === "Staff" && detaRegear.Status === "Negado"&& ( 
+                        <div className={styles.divStaffFinalizado}>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido criado em:</strong> {detaRegear.Data}</p>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido aceito em:</strong> {detaRegear.DataAceito}</p>
+                            <p className={styles.divStaffAceitoP}><strong>Pedido finalizado em:</strong> {detaRegear.DataFinalizado}</p>
+
+                            {detaRegear.MsgStaff !== "Null" &&(
+                                <div>
+                                    <p className={styles.Msg}><strong>Mensagem da Staff:</strong></p>
+                                    <p className={styles.Msg}>{detaRegear.MsgStaff}</p>
+                                </div>
+                            )}  
+                        </div>
+                    )}
+
                 </div>
             )}
 
@@ -329,6 +391,23 @@ const Pedidos = () => {
 
                 </div>
             )}
+
+        <Modal open={open} onClose={handleClose}>
+            <Modal.Header>
+                <Modal.Title>Re-gear cancelado</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <textarea className={styles.msgNegandoRegear} placeholder="Digite o motivo aqui" rows="5" value={msgRecusado} onChange={e => setMsgRecusado(e.target.value)}/>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button onClick={recusarRegear} appearance="primary">
+                Cancelar
+            </Button>
+            <Button onClick={handleClose} appearance="subtle">
+                Sair
+            </Button>
+            </Modal.Footer>
+        </Modal>
             
         </div>
     )

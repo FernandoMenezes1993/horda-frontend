@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import VisibleIcon from '@rsuite/icons/Visible';
 import TrashIcon from '@rsuite/icons/Trash';
 
-import styles from "./TabelaMembrosStyle.module.css"
+import styles from "./TabelaStaffStyle.module.css"
 
 function TabelaStaff( { regears, token }) {
     const [paginaAtual, setPaginaAtual] = useState(1);
@@ -24,10 +24,6 @@ function TabelaStaff( { regears, token }) {
     const mudarPagina = (numeroPagina) => {
         setPaginaAtual(numeroPagina);
     };
-
-    const DeletarPedido = (id)=>{
-        alert(`Vamos deletar o pedido ${id}`);
-    }
 
     const VerPedido = (id)=>{
         const url = `/pedido?q=${token}&id=${id}`;
@@ -56,7 +52,6 @@ function TabelaStaff( { regears, token }) {
                         <th className={styles.TabelaTH}>Status</th>
                         <th className={styles.TabelaTH}>Albion</th>
                         <th className={styles.TabelaTHIcon}>Pedido</th>
-                        <th className={styles.TabelaTHIcon}>Deletar</th>
                     </tr>
                 </thead>
 
@@ -70,7 +65,6 @@ function TabelaStaff( { regears, token }) {
                                 <td className={styles.TabelaTD}><span className={styles[regear.Status]}>{regear.Status}</span></td>
                                 <td className={styles.TabelaTDKillBoard} onClick={()=> pgRegearAlbion(regear.Link)}>Kill Board</td>
                                 <td className={styles.TabelaTDIcon} onClick={() => VerPedido(regear._id)}><VisibleIcon className={styles.icons}/></td>
-                                <td className={styles.TabelaTDIcon} onClick={() => DeletarPedido(regear._id)}><TrashIcon className={styles.icons}/></td>
                             </tr>
                         ))
                     }

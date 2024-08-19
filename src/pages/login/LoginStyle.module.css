@@ -17,7 +17,7 @@
 
 .formes{
     width: 18%; 
-    height: 40%; 
+    height: 60%; 
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -83,4 +83,15 @@
     width: 100vw; 
     height: 100vh; 
     background-color: rgba(0, 0, 0, 0.5);
+}
+.Complemento p{ 
+    font-weight: bold; 
+}
+.OK{
+    color: green;
+    font-weight: bold;
+}
+.Erro{
+    color: red;
+    font-weight: bold;
 }
