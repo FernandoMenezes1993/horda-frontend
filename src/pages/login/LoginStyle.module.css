@@ -95,3 +95,15 @@
     color: red;
     font-weight: bold;
 }
+
+@media only screen and (max-width: 414px) {
+    .formes{
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 260px) {
+    .formes{
+        width: 70%;
+    }
+}
+
