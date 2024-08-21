@@ -351,7 +351,13 @@ const Pedidos = () => {
                                     <img src={`https://render.albiononline.com/v1/item/${detaRegear.Cabeca}`} alt="" className={styles[imgCabeca]} onClick={ClicoCabeca}/>
                                 </div>
                                 <div className={styles.divCima}>
-                                    <img src={`https://render.albiononline.com/v1/item/${detaRegear.Capa}`} alt="" className={styles.imgCima}/>
+                                    
+                                    {detaRegear.Capa === "Null" ? (
+                                        <img src={CertoVerde} alt="" className={styles.imgCima}/>
+                                        
+                                    ):(
+                                        <img src={`https://render.albiononline.com/v1/item/${detaRegear.Capa}`} alt="" className={styles.imgCima}/>
+                                    )}
                                 </div>
                             </div>
 
