@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
 import VisibleIcon from '@rsuite/icons/Visible';
-import { Dropdown } from 'rsuite';
 
-import styles from "./TabelaStaffStyle.module.css"
+import styles from "./TabelaStaffStyle.module.css";
 
 function TabelaStaff({ regears, token }) {
     const [paginaAtual, setPaginaAtual] = useState(1);
@@ -16,10 +15,10 @@ function TabelaStaff({ regears, token }) {
         window.open(url, '_blank');
     };
 
-    // Filtrando os regears com base no nome digitado e no responsável selecionado
+    // Filtrando os regears com base no nome digitado e no responsável inserido
     const regearsFiltrados = regears.filter(regear =>
         regear.Name.toLowerCase().includes(filtroNome.toLowerCase()) &&
-        (filtroResponsavel === "" || regear.Responsavel === filtroResponsavel)
+        (filtroResponsavel === "" || regear.Responsavel.toLowerCase().includes(filtroResponsavel.toLowerCase()))
     );
 
     // Cálculo de páginas com base nos itens filtrados
@@ -36,39 +35,31 @@ function TabelaStaff({ regears, token }) {
     const VerPedido = (id) => {
         const url = `/pedido?q=${token}&id=${id}`;
         window.open(url, '_blank');
-    }
+    };
 
     const pgRegearAlbion = (KillBoard) => {
         window.open(KillBoard, '_blank');
-    }
-
-    // Extraindo todos os responsáveis únicos para o dropdown
-    const responsaveisDisponiveis = [...new Set(regears.map(regear => regear.Responsavel))];
+    };
 
     return (
         <div className={styles.tabelaMembro}>
-            
             <div className={styles.filtroContainer}>
                 <div className={styles.filtroSolicitante}>
-                    <Dropdown 
-                        title={filtroResponsavel || "Todos"} 
-                        onSelect={setFiltroResponsavel}
-                        className={styles.dropdownFiltro}
-                    >
-                        <Dropdown.Item eventKey="">Todos</Dropdown.Item>
-                        {responsaveisDisponiveis.map(responsavel => (
-                            <Dropdown.Item key={responsavel} eventKey={responsavel}>
-                                {responsavel}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown>
+                    <span className={styles.Solicitante}>Responsável</span>
+                    <input 
+                        type="text" 
+                        placeholder="Nome do Responsável" 
+                        value={filtroResponsavel} 
+                        onChange={(e) => setFiltroResponsavel(e.target.value)} 
+                        className={styles.inputFiltro} 
+                    />
                 </div>
 
                 <div className={styles.filtroNome}>
                     <span className={styles.Solicitante}>Solicitante</span>
                     <input 
                         type="text" 
-                        placeholder="Filtrar por nome" 
+                        placeholder="Nome do Solicitante" 
                         value={filtroNome} 
                         onChange={(e) => setFiltroNome(e.target.value)} 
                         className={styles.inputFiltro}
