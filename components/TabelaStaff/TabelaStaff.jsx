@@ -51,7 +51,7 @@ function TabelaStaff({ regears, token }) {
             <div className={styles.filtroContainer}>
                 <div className={styles.filtroSolicitante}>
                     <Dropdown 
-                        title={filtroResponsavel || "Selecionar responsável"} 
+                        title={filtroResponsavel || "Todos"} 
                         onSelect={setFiltroResponsavel}
                         className={styles.dropdownFiltro}
                     >
@@ -63,7 +63,7 @@ function TabelaStaff({ regears, token }) {
                         ))}
                     </Dropdown>
                 </div>
-                
+
                 <div className={styles.filtroNome}>
                     <span className={styles.Solicitante}>Solicitante</span>
                     <input 
