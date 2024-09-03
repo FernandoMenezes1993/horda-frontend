@@ -92,7 +92,6 @@ const PedidosStaff = () => {
                 </div>
 
                 <div className={styles.TabelaRegear}>
-                    {/* Adicione conteúdo da tabela aqui */}
                     <TabelaMembros regears={detaRegear} token={token}/>
                 </div>
             </div>

@@ -8,20 +8,20 @@ function TabelaStaff({ regears, token }) {
     const [paginaAtual, setPaginaAtual] = useState(1);
     const [itensPorPagina, setItensPorPagina] = useState(10);
     const [filtroNome, setFiltroNome] = useState("");
-    const [filtroResponsavel, setFiltroResponsavel] = useState(""); // Novo estado para filtrar por responsável
+    const [filtroResponsavel, setFiltroResponsavel] = useState(""); 
 
     const chamarRegear = (solicitacao) => {
         const url = `/pedido?q=${token}&w=${solicitacao._id}`;
         window.open(url, '_blank');
     };
 
-    // Filtrando os regears com base no nome digitado e no responsável inserido
-    const regearsFiltrados = regears.filter(regear =>
-        regear.Name.toLowerCase().includes(filtroNome.toLowerCase()) &&
-        (filtroResponsavel === "" || regear.Responsavel.toLowerCase().includes(filtroResponsavel.toLowerCase()))
-    );
+    const regearsFiltrados = regears
+        .filter(regear =>
+            regear.Name.toLowerCase().includes(filtroNome.toLowerCase()) &&
+            (filtroResponsavel === "" || regear.Responsavel.toLowerCase().includes(filtroResponsavel.toLowerCase()))
+        )
+        .sort((a, b) => a.Name.localeCompare(b.Name)); // Ordena alfabeticamente pelo campo 'Name'
 
-    // Cálculo de páginas com base nos itens filtrados
     const indexOfLastItem = paginaAtual * itensPorPagina;
     const indexOfFirstItem = indexOfLastItem - itensPorPagina;
     const solicitaçõesAtuais = regearsFiltrados.slice(indexOfFirstItem, indexOfLastItem);
