@@ -95,15 +95,23 @@
     color: red;
     font-weight: bold;
 }
+@media (max-width: 480px) {
+    .formes{
+        width: 80%;
+        height: 60%;
+        background-color: rgba(0, 0, 0, 0.438);
+    }
+        .formes button{
+            font-size: 1.6rem;            
+        }
+    .inputsLogin{
+        font-size: 1.7rem;
+    }
+    .Complemento p{ 
+        color: rgb(236, 235, 235);
+        font-weight: bold; 
+        font-size: 1.7rem;
+    }
+  }
 
-@media only screen and (max-width: 414px) {
-    .formes{
-        width: 60%;
-    }
-}
-@media only screen and (max-width: 260px) {
-    .formes{
-        width: 70%;
-    }
-}
 
