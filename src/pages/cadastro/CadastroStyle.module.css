@@ -88,3 +88,9 @@
         color: white;
     }
 }
+@media (min-width: 481px) and (max-width: 800px) {
+    .formes {
+        width: 20%;
+        height: 70%;
+    }
+}
