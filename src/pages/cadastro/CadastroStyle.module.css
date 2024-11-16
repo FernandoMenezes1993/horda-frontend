@@ -88,13 +88,3 @@
         color: white;
     }
 }
-
-@media (min-width: 361px) and (max-width: 800px) {
-    .formes {
-        width: 20%;
-        height: 70%;
-    }
-    .inputsLogin{
-        font-size: 0.7rem;
-    }
-}

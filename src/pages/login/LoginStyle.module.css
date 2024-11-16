@@ -108,15 +108,3 @@
         color: white;
     }
 }
-
-@media (min-width: 481px) and (max-width: 800px) {
-    .formes {
-        width: 20%;
-        height: 85%;
-    }.inputsLogin{
-        font-size: 0.9rem;
-    }
-    .Complemento{
-        color: white;
-    }
-}
