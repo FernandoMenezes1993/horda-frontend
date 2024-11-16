@@ -77,7 +77,7 @@
 }
 
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
     .formes{
         width: 70%;
     }
