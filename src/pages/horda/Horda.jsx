@@ -1,5 +1,6 @@
 import CustomSidenav from "../../../components/Nav/Nav.jsx";
 import TabelaMembros from "../../../components/TabelaMembros/TabelaMembros.jsx";
+import TabelaMembrosCelular from "../../../components/TabelaMembrosCelular/TabelaMembrosCelular.jsx";
 
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -175,7 +176,7 @@ const Horda = () => {
 
     return (
         <div className={styles.Horda}>
-            <div>
+            <div className={styles.CustomSidenav}>
                 <CustomSidenav 
                     Cargo={player.Cargo} 
                     pg={pagina} 
@@ -194,9 +195,13 @@ const Horda = () => {
                     </button>
                 </div>
 
-                <div className={styles.TabelaRegear}>
+                <div className={styles.TabelaRegearDesktop}>
                     {/* Adicione conteúdo da tabela aqui */}
                     <TabelaMembros regears={dateRegear} token={token}/>
+                </div>
+                <div className={styles.TabelaRegearMobile}>
+                    {/* Adicione conteúdo da tabela aqui */}
+                    <TabelaMembrosCelular regears={dateRegear} token={token}/>
                 </div>
             </div>
 

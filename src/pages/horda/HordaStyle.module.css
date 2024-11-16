@@ -41,7 +41,7 @@
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.336);
         box-shadow: 1px 1px 8px white;
     }
-.TabelaRegear{
+.TabelaRegearDesktop{
     width: 90%;
     height: 83%;
     margin-bottom: 1%;
@@ -103,4 +103,21 @@
 }
 .AtencaoP{
     font-weight: bold;
+}
+.TabelaRegearMobile {
+    display: none;
+}
+
+
+@media (max-width: 480px) {
+    .CustomSidenav{
+        display: none;
+    }
+    .TabelaRegearMobile {
+        display: block;
+        width: 90%;
+    }
+    .TabelaRegearDesktop{
+        display: none;
+    }
 }

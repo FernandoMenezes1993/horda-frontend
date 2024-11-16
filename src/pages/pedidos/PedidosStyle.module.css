@@ -221,3 +221,13 @@
 .msgNegandoRegear{
     width: 97%;
 }
+
+@media (max-width: 480px) {
+    .set{
+        display: none;
+    }
+    .dados{
+        width: 85%;
+        height: 90%;
+    }
+}
