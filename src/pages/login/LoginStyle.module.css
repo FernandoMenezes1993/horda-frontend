@@ -95,6 +95,8 @@
     color: red;
     font-weight: bold;
 }
+
+
 @media (max-width: 480px) {
     .formes{
         width: 70%;
@@ -105,4 +107,4 @@
     .Complemento{
         color: white;
     }
-  }
+}
