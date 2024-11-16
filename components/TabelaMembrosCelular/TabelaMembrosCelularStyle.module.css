@@ -12,7 +12,7 @@
 }
 .tabelaDados{
     background-color: rgba(177, 177, 177, 0.705);
-    width: 99%;
+    width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
     font-weight: bold;
@@ -33,7 +33,7 @@
     }
 .TabelaTH ,.TabelaTHIcon{
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: .5% 0% .5% 0%;
     border: solid black 1px; 
     background-color: rgb(83, 9, 9);
@@ -53,6 +53,7 @@
 }
     .TabelaTD{
         background-color: rgba(216, 216, 216, 0.082); 
+        font-size: .8rem;
     }
     .TabelaTDIcon{    
         background-color: rgba(114, 114, 114, 0.575);    
