@@ -110,6 +110,7 @@
 
 
 @media (max-width: 480px) {
+
     .CustomSidenav{
         display: none;
     }
@@ -119,5 +120,9 @@
     }
     .TabelaRegearDesktop{
         display: none;
+    }
+    .ButtonSolicitar{
+        width: 70%;
+        font-size: 1.2rem;
     }
 }
