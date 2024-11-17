@@ -48,7 +48,6 @@ function TabelaMembros({ regears, token }) {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                console.log(response);
 
             } catch (error) {
                 console.error(error);

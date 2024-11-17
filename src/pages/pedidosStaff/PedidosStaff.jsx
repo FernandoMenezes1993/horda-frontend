@@ -29,7 +29,6 @@ const PedidosStaff = () => {
 
 
     const verificarToken = async () => {
-        console.log(token)
         try {
             const res = await fetch(`${BackURL}/api/checks/${token}`);
             if (!res.ok) {
@@ -37,7 +36,6 @@ const PedidosStaff = () => {
             }
             const data = await res.json();
             setPlayer(data);
-            console.log(data)
             if (data.res === 502) {
                 
                 navigate(`/`);
@@ -50,7 +48,6 @@ const PedidosStaff = () => {
         if (token) {
             verificarToken();
         } else {
-            console.log("Token não encontrado, redirecionando para login");
             navigate(`/`);
         }
     }, [token]);

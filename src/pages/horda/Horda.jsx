@@ -40,7 +40,6 @@ const Horda = () => {
     const fecharModal = () => setOpen(false);
 
     const verificarToken = async () => {
-        console.log(token)
         try {
             const res = await fetch(`${BackURL}/api/checks/${token}`);
             if (!res.ok) {
@@ -48,7 +47,6 @@ const Horda = () => {
             }
             const data = await res.json();
             setPlayer(data);
-            console.log(data)
             if (data.res === 502) {
                 
                 navigate(`/`);
@@ -61,13 +59,19 @@ const Horda = () => {
         if (token) {
             verificarToken();
         } else {
-            console.log("Token não encontrado, redirecionando para login");
             navigate(`/`);
         }
     }, [token]);
 
     const SolicitarRegear = async () => {
         if (linkMorteAlbion.includes("albiononline.com/killboard/kill/")) {
+            toaster.push(
+                <Notification type="info" header="Solicitando..." duration={5000} closable>
+                    <p>Por favor, aguarde!</p>
+                    <p>Estamos registrando o seu regear</p>
+                    <p>Não atualize a página!</p>
+                </Notification>
+            );
             const now = new Date();
             const day = now.getDate();
             const month = now.getMonth() + 1;
@@ -116,7 +120,6 @@ const Horda = () => {
                         window.location.reload();
                     }, 2000)
                 } else if(result === 400){
-                    console.log(result)
                     setOpen(false)
                     toaster.push(
                         <Notification type="error" header="Error" duration={5000} closable>
@@ -135,6 +138,14 @@ const Horda = () => {
                         </Notification>
                     );
                     setLinkMorteAlbion("");
+
+                } else if(result === 500){
+                    toaster.push(
+                        <Notification type="error" header="Error" duration={5000} closable>
+                            <p>Erro na repota do Albion</p>
+                            <p>Por favor, solicite novamente eu Re-gear!</p>
+                        </Notification>
+                    );
                 }
             } catch (error) {
                 console.error(error);
@@ -242,9 +253,13 @@ const Horda = () => {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button onClick={SolicitarRegear} appearance="primary">
-                            Solicitar
-                        </Button>
+                    <Button 
+                        onClick={SolicitarRegear} 
+                        appearance="primary" 
+                        disabled={loading}
+                    >
+                        {loading ? "Solicitando..." : "Solicitar"}
+                    </Button>
                         <Button onClick={fecharModal} appearance="subtle">
                             Cancelar
                         </Button>
